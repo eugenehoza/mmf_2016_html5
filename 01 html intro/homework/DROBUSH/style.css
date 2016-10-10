@@ -1,0 +1,80 @@
+*{margin: 0; padding: 0;}
+html, body {
+     height: 100%;
+}
+
+header{
+     padding-top:10px;
+}
+
+.content {
+     text-align: center;
+     color:#FFFAFA; 
+     position: relative; 
+     display: block; 
+     max-width: 1200px; 
+     margin: 0 auto; 
+     min-height: 100%;
+}
+h1 {
+     color: red;
+     text-align: center;
+}
+body {
+     background-image:url("bg-dark-4800.png");
+     width: 100%; 
+     overflow-x: hidden;
+}
+#foot {
+     position: absolute; 
+     width: 100%; 
+     color:#FF4500; 
+     bottom: 20px; 
+     display: block;
+}
+.content mark { 
+     text-align: center; 
+     font-size:24;
+}
+.content img {
+     position: relative; 
+     width:250px; 
+     height:250px;
+}
+.content a {
+     position: relative;
+}
+.icons {
+     text-align: center; 
+     margin-top: 50px;
+}
+.img-container {
+     display: inline-block;
+   
+}
+.icons > div {
+     text-align: center;
+}
+.icons +p{
+	padding: 30px;
+	margin: 50px;
+	font-size: 20px;
+	border: 1px solid  	#4F4F4F;
+	
+}
+time{display: block;
+}
+#foot a {
+     color: yellow; 
+     text-decoration: none;
+}
+dd, dt {
+     display: inline-block; 
+     font-size: 25px;
+}
+#foot a:hover{
+	text-decoration: underline;
+}
+#foot a:visited{
+	color: #FFD700;
+}
