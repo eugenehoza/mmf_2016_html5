@@ -1,0 +1,122 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>title</title><!-- html4 -->
+	<style>
+		body{background: #4C5B72;
+			color:#fff;
+		text-align: center}
+		aside {float: right; }
+		article {margin-right: 240px;
+			display: block; }
+		mark {background: #ffec82;
+			padding: 0 3px;
+			border: 1px dashed #333;
+		}
+		h1{
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 30px;
+			letter-spacing: 5px;
+			text-align: center;
+			color: #D76B5E;
+			font-weight: 700;
+		}
+		h2{
+			font-family: Geneva, Arial, Helvetica, sans-serif;
+			font-size: 26px;
+			letter-spacing: 4px;
+			text-align: center;
+			color: #D76B5E;
+			font-weight: 700;
+		}
+
+		 .menusite a {
+			font-size: 15px;
+			padding-left: 20px;
+			padding-right: 40px;
+			display: inline-block;
+			padding-top: 13px;
+			height: 40px;
+			margin-left: -4px;
+			font-weight: 600;
+			 text-decoration: none;
+
+		}
+		 .menusite {
+			width: 732px;
+			height: 53px;
+			margin-top: 21px;
+			padding-left: 25px;
+			 border-bottom: 1px #14111D solid;
+			 background: #272434;
+			 border-radius: 4px;}
+		.menusite a:first-child{
+			color: #aa4433;
+		}
+		.menusite a:last-child{
+			color: #ffec82;
+		}
+		.menusite a:hover {
+			background: #786b59;}
+
+		#letter {
+			color: #55eeaa;
+		}
+		h2:first-letter{
+		color:#ddaadd;
+			font-size:35px ;
+		}
+		h2:before {
+			content: open-quote;
+			display: inline-block;
+			position: absolute;
+			margin-left: -11px;}
+		h2:after{
+			content: close-quote;
+			display: inline-block;}
+
+        .visit:visited {
+			color: #900060;
+		}
+		.notvisit:link {
+			color: #3d5;
+		}
+
+	</style><!-- html5 -->
+</head><!-- html4 -->
+
+<body>
+<div class="menusite">
+	<a href="#">Home</a>
+	<a href="#">About us</a>
+	<a href="#">Works</a>
+	<a href="#">Features</a>
+	<a href="#">Blog</a>
+	<a href="#">Contact us</a>
+</div>
+<p><a href="#" class="visit">Посещенная ссылка</a></p>
+<p><a href="#" class="notvisit">Непосещенная ссылка</a></p>
+<hr color="red" width="300"> <!-- html4 -->
+<h1>tag h1</h1><!-- html4 -->
+<mark>tag mark</mark><!-- html5 -->
+<p align="center">tag p align center</p><!-- html4 -->
+<hgroup>
+	<header><h1>tag header</h1></header><!-- html5 -->
+
+	<aside>
+		tag aside
+	</aside><!-- html5 -->
+	<section>
+		<article id="letter">tag article</article> <!-- html5 -->
+		<main>tag main</main><!-- html5 -->
+	</section><!-- html5 -->
+	<h2>tag h2</h2><!-- html4 -->
+	<p>tag p</p><!-- html4 -->
+	<time>tag time</time><!-- html5 -->
+	<div> tag div</div><!-- html4 -->
+	<b>tag b </b> <sub>tag sub</sub><sup> tag sup</sup> </b><!-- html4 -->
+</hgroup><!-- html5 -->
+<footer>tag footer</footer><!-- html5 -->
+
+</body><!-- html4 -->
+</html><!-- html4 -->
