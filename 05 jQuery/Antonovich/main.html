@@ -1,0 +1,172 @@
+<html>
+
+<head>
+    <style>
+        details summary::-webkit-details-marker {
+            display: none;
+        }
+        
+        h2 {
+            color: #002850;
+            font-size: 30px;
+            font-weight: normal;
+            padding: 45px 0 15px;
+            cursor: pointer;
+        }
+        
+        .accordion {
+            border: 1px solid #ddd;
+            border-top: none;
+            float: left;
+            width: 200px;
+            position: relative;
+        }
+        
+        h3 {
+            clear: both;
+        }
+        
+        .accordion h2 {
+            border-top: 1px solid #ddd;
+            color: #222;
+            font: 14px/30px 'Verdana', sans-serif;
+            height: 30px;
+            margin: 0;
+            padding: 0;
+            text-indent: 10px;
+        }
+        
+        .subMenu {
+            padding-left: 10px;
+        }
+        
+        .accordion div {
+            padding-left: 10px;
+        }
+    </style>
+    <script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+</head>
+
+<body>
+    <h3>Native JS</h3>
+    <div id="accordion" class="accordion" style="margin-bottom:15px;">
+
+    </div>
+
+    <h3>Jquery</h3>
+    <div id="accordion-jq" class="accordion">
+    </div>
+
+    <script type="text/javascript">
+        var tree = 
+        [ 
+        { 
+            id: 1,
+            parent_id: null, 
+            name: "Меню 1" 
+        }, 
+        {
+            id: 2, 
+            parent_id: null, 
+            name: "Меню 2" 
+        },
+        {
+            id: 3,
+            parent_id: 2,
+            name: "Подменю"
+        },
+        {
+            id: 4,
+            parent_id: 1,
+            name: "Подменю"
+        },
+        {
+            id: 5,
+            parent_id: null,
+            name: "Меню"
+        },
+        {
+            id: 6,
+            parent_id: 2,
+            name: "Меню"
+        },
+        {
+            id: 7,
+            parent_id: 2,
+            name: "Меню"
+        },
+        {
+            id: 8,
+            parent_id: 5,
+            name: "Меню"
+        }
+        ];
+        var div = document.getElementById('accordion'); 
+
+        var createNode = function(item, submenu){
+                var firstLevel = document.createElement('details');    
+                if (submenu == true){
+                    firstLevel.className = "subMenu";
+                } else{
+                    firstLevel.className = "menu";
+                }           
+                firstLevel.id = item.id;
+                var innerHTML = "<summary><h2>" + item.name + "</h2></summary>";
+                firstLevel.innerHTML = innerHTML; 
+                return firstLevel;
+        }
+
+        tree.forEach(function(item, i, arr){
+            if (item.parent_id == null){               
+                var node = createNode(item, false);
+                div.appendChild(node);
+            } 
+            if (item.parent_id != null){
+                var element = document.getElementById(item.parent_id);
+                if (element != null){
+                var node = createNode(item, true);             
+                element.appendChild(node);
+                }
+            }
+        });   
+  
+
+    var createNode_jq = function(item, submenu){
+        var firstLevel = document.createElement('h2');                                
+                firstLevel.innerHTML = item.name;              
+                return firstLevel;
+        }
+
+     tree.forEach(function(item, i, arr){
+            if (item.parent_id == null){               
+                var node = createNode_jq(item, false);
+                $("#accordion-jq").append(node);
+                var str = document.createElement('div');                
+                str.id = item.id;
+                 $("#accordion-jq").append(str);
+            } 
+            if (item.parent_id != null){
+                var parent_id = item.parent_id;
+                var element = $( "#accordion-jq" ).children("#" + parent_id).first();
+                if (element != null){
+                var node = createNode_jq(item, true);             
+                element.append(node);
+                var str = document.createElement('div');
+                str.id = item.id;                
+                element.append(str)
+                }
+            }
+        });
+        
+  </script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+	$('#accordion-jq').find('h2').click(function(){
+	    $(this).next().stop().slideToggle();
+	}).next().stop().hide();
+
+});
+</script>
+</body>
+
+</html>
