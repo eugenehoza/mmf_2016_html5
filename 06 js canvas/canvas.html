@@ -1,0 +1,99 @@
+<html>
+  <head>
+    <title>canvas example</title>
+  </head>
+  <body>
+
+      <canvas id="canvas" width="500" height="500">
+        Canvas is not supported on this device
+      </canvas>
+
+      <script charset="utf-8">
+
+        var canvas = document.getElementById("canvas");
+        var ctx = canvas.getContext("2d");
+
+        //ctx.fillRect(50,0,200,100);
+        // simple line
+        ctx.beginPath();
+        ctx.moveTo(50,0);
+        ctx.lineTo(50,50);
+
+        ctx.moveTo(100,0);
+        ctx.lineTo(150,50);
+
+        ctx.stroke();
+		
+        ctx.beginPath();
+
+        ctx.moveTo(0,50);
+        ctx.lineTo(150,250);
+		
+		
+        // some line properties
+        ctx.strokeStyle = "#00FF00";
+        ctx.lineWidth = 10;
+
+        ctx.stroke();
+		
+        ctx.moveTo(300,200);
+        ctx.lineTo(150,250);
+
+        ctx.stroke();
+		
+        // arc
+        ctx.moveTo(400, 50);
+        ctx.arc(350, 50, 50, 0, 3.14, true);
+        ctx.stroke();
+		/*
+        // rect fill
+        ctx.fillStyle = "blue";
+        ctx.fillRect(200, 100, 20, 30);
+
+        // stroke style
+        ctx.strokeStyle = "red";
+        ctx.lineWidth = 3;
+        ctx.strokeRect(20, 300, 50, 100);
+
+        // text
+        ctx.lineWidth = 2;
+        ctx.font = 'italic 40pt Calibri';
+        ctx.fillText("Hello world", 300,300);
+        ctx.strokeText("Hello world", 300,200);
+
+        // transformations
+        // translate
+        ctx.translate(0, 100);
+        ctx.fillText("Hello world translate", 300,300);
+        ctx.translate(0, -100);
+        ctx.strokeText("Hello world translate", 300,300);
+        // scale
+        ctx.translate(250, 250);
+        ctx.scale(0.5, 0.5);
+        ctx.fillText("Hello world scale", 0,0);
+        ctx.scale(1/0.5, 1/0.5);
+        ctx.fillText("Hello world scale", 0,0);
+        ctx.translate(-250, -250);
+        // rotate
+        ctx.translate(150, 150);
+        ctx.rotate(0.7);
+        ctx.fillText("Hello world rotate", 0,0);
+        ctx.rotate(-0.7);
+        ctx.translate(-150, -150);
+
+        // save / rest
+        ctx.save();
+        ctx.translate(0, 150);
+        ctx.fillStyle = "red";
+        ctx.font = 'italic 20pt Calibri';     
+        ctx.fillText("Hello world rotate", 0,20);
+        ctx.restore();
+        ctx.fillText("Hello world rotate", 0,20);
+
+		*/
+        console.log(ctx);
+
+      </script>
+
+  </body>
+</html>
