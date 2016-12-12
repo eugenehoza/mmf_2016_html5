@@ -1,0 +1,64 @@
+<html>
+
+<head>
+    <style>
+        table tr td {
+            border: 1px solid steelblue;
+        }
+    </style>
+    <meta charset="utf-8">
+</head>
+
+<body>
+    <table id='table'></table>
+    <script type="text/javascript">
+        var table = document.getElementById('table');        
+        var countColumn = 15;
+        var countLine = 18;
+        for(var i = 1; i <= countLine; i++){
+            var tr = document.createElement('tr');
+            tr.className = i;
+            for(var j = 1; j <= countColumn; j++){
+                var td = document.createElement('td');
+                td.innerHTML = "ячейка";
+                td.className = j;
+                tr.onmouseover = tr.onmouseout = handler;                
+                tr.appendChild(td);
+            }            
+            table.appendChild(tr);
+        }     
+
+        function handler(event){
+            var indexColumn, indexRow;     
+            indexColumn = event.path[0].className;
+            indexRow = event.path[1].className;
+            if (event.type == 'mouseover') {               
+               var rows = document.getElementsByClassName(indexRow);
+               var columns = document.getElementsByClassName(indexColumn);
+               var changeRows = Array.prototype.filter.call(rows, function(row){
+                   return row.localName === 'tr';
+               });
+               var changeColumns = Array.prototype.filter.call(columns, function(column){
+                   return column.localName === 'td';
+               })
+               for(var i = 0; i < changeRows.length; i++){                   
+                       changeRows[i].style.background = 'red';                   
+               }               
+               for(var i = 0; i < changeColumns.length; i++){                   
+                       changeColumns[i].style.background = 'red';                   
+               }        
+            }
+            if (event.type == 'mouseout') {            
+            var table = document.getElementById('table');
+               for(var i = 0; i < table.children.length; i++){
+                   table.children[i].style.background = '';
+                   for(var j = 0; j < table.children[i].children.length; j++){
+                       table.children[i].children[j].style.background = '';
+                   }
+               }
+           }
+        }  
+    </script>
+</body>
+
+</html>
