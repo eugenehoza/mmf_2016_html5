@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+	<title>Task</title>
+</head>
+<body>
+	<div>
+		<label>JS Selects</label>
+		<select id="select_js_1" onchange="jsOnchangeCountry(this)"></select>
+		<select id="select_js_2" disabled onchange="jsOnchangeCity(this)"></select>
+		<select id="select_js_3" disabled></select>
+	</div>
+	<div>
+		<label>JQ Selects</label>
+		<select id="select_jquery_1"></select>
+		<select id="select_jquery_2" disabled></select>
+		<select id="select_jquery_3" disabled></select>
+	</div>
+	<script type="text/javascript">
+		var data = {
+			"Please, select": [],
+			"Belarus": {
+				"Minsk": ["220000", "220001"],
+				"Brest": ["224000"]
+			},
+			"Russia": {
+				"Moscow": ["113623", "119027"],
+				"Spb": ["198323", "190031"]
+			}
+		}
+
+		var secondElemValue = '';
+
+		function insertDataJs(elementId, data) {
+			var elem = document.getElementById(elementId);
+			elem.innerHTML = '';
+
+			elem.disabled = true;
+
+			if (typeof data === 'undefined') {
+				return;
+			}
+
+			for (var i = 0; i < data.length; i++) {
+				var opt = document.createElement('option');
+				opt.value = data[i];
+				opt.innerHTML = data[i];
+
+				elem.appendChild(opt);
+				elem.disabled = false;
+			}			
+		}
+
+		insertDataJs("select_js_1", Object.keys(data))
+
+		function jsOnchangeCountry(elem) {
+			var keys = Object.keys(data[elem.value]);
+			insertDataJs("select_js_2", keys);
+			insertDataJs("select_js_3", data[elem.value][keys[0]]);
+			secondElemValue = elem.value
+		}
+
+		function jsOnchangeCity(elem) {
+			insertDataJs("select_js_3", data[secondElemValue][elem.value]);
+		}
+	</script>
+	<script type="text/javascript">
+		var select1 = $("#select_jquery_1")
+		var select2 = $("#select_jquery_2")
+		var select3 = $("#select_jquery_3")
+
+		var secondElemValueJq = '';
+
+		function insertDataJq(elem, arr) {
+			elem.html('');
+			elem.attr('disabled', 'true');
+			$.each(arr, function(key, value) {
+				elem.append($("<option>", {value: value, text: value}));
+				elem.removeAttr('disabled', 'false');
+			});
+		}
+
+		insertDataJq(select1, Object.keys(data));
+
+		select1.change(function(){
+			elem = $(this);
+			secondElemValueJq = $(this).val();
+			keys = Object.keys(data[secondElemValueJq]);
+			insertDataJq(select2, keys);
+			insertDataJq(select3, data[secondElemValueJq][keys[0]]);
+		});
+
+		select2.change(function(){
+			insertDataJq(select3, data[secondElemValueJq][$(this).val()]);
+		});
+	</script>
+</body>
+</html>
