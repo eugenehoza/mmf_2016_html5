@@ -1,71 +1,104 @@
-<html>
-  <head>
-    <title>packman game</title>
-	<script type="text/javascript" src="jquery-1.11.3.js"></script>
-  </head>
-  <body>
+<html> 
+<head> 
+<title>packman game</title> 
+<meta charset="utf-8"/> 
+<script type="text/javascript" src="jquery-1.11.3.js"></script> 
+</head> 
+<body> 
 
-      <canvas id="canvas" width="500" height="500">
-        Canvas is not supported on this device
-      </canvas>
+<canvas id="canvas" width="500" height="500"> 
+Canvas is not supported on this device 
+</canvas> 
 
-      <script charset="utf-8">
+<input type="button" onclick="start_time()" value="Начать"/> 
+<input type="button" onclick="stop_time()" value="Сбросить"/> 
+<time class="timer">00:00:00</time> 
 
-        var canvas = document.getElementById("canvas");
-        var ctx = canvas.getContext("2d");
-		var canvasSize = 500;
-		
-		var packmanCenter = {x: 400, y : 150};
-		var packmanShiftDistance = 10;
-		
-		function drawPackman(packmanCenter){
-			ctx.moveTo(packmanCenter.x, packmanCenter.y);
-			ctx.arc(packmanCenter.x, packmanCenter.y, 20, 0, 1.8*3.14, false);
-			ctx.lineTo(packmanCenter.x, packmanCenter.y);
-			ctx.stroke();
-		}
-		
-		function clearContext(){
-		
-			ctx.beginPath();
-			ctx.moveTo(0,0);
-			ctx.lineTo(canvasSize,0);
-			ctx.lineTo(canvasSize,canvasSize);
-			ctx.lineTo(0,canvasSize);
-			ctx.closePath();
-			ctx.stroke();
-			ctx.clearRect(0, 0, canvasSize, canvasSize);
-		}
-		
-		$(document).keydown(function(e){
-			// 37 - left
-			// 38 - top
-			// 39 - right
-			// 40 - down
-			
-			switch (e.keyCode){
-				case 37:
-					packmanCenter.x -= packmanShiftDistance
-					break;
-				case 38:
-					packmanCenter.y -= packmanShiftDistance
-					break;
-				case 39:
-					packmanCenter.x += packmanShiftDistance
-					break;					
-				case 40:
-					packmanCenter.y += packmanShiftDistance
-					break;
-			}
-		});
-			
-		// infinite loop
-		setInterval(function(){
-			clearContext();
-			drawPackman(packmanCenter);
-		}, 50)
+<script charset="utf-8"> 
 
-      </script>
+var canvas = document.getElementById("canvas"); 
+var ctx = canvas.getContext("2d"); 
+var canvasSize = 500; 
 
-  </body>
+var packmanCenter = {x: 400, y : 150}; 
+var packmanShiftDistance = 10; 
+var packmanDirect = {alpha : 0.2, betta : 2*3.14-0.2}; 
+
+function drawPackman(packmanCenter, packmanDirect){ 
+ctx.moveTo(packmanCenter.x, packmanCenter.y); 
+ctx.arc(packmanCenter.x, packmanCenter.y, 20, packmanDirect.alpha, packmanDirect.betta, false); 
+ctx.lineTo(packmanCenter.x, packmanCenter.y); 
+ctx.stroke(); 
+} 
+
+function clearContext(){ 
+
+ctx.beginPath(); 
+ctx.moveTo(0,0); 
+ctx.lineTo(canvasSize,0); 
+ctx.lineTo(canvasSize,canvasSize); 
+ctx.lineTo(0,canvasSize); 
+ctx.closePath(); 
+ctx.stroke(); 
+ctx.clearRect(0, 0, canvasSize, canvasSize); 
+} 
+
+function start_time() { 
+$('.timer').text('00:00:00') 
+var this_date = new Date(); 
+start_time_interval = setInterval(function(){ 
+var new_date = new Date() - this_date; 
+var ms = Math.abs(Math.floor(new_date%1000/10)); //ms 
+var sec = Math.abs(Math.floor(new_date/1000)%60); //sek 
+var min = Math.abs(Math.floor(new_date/1000/60)%60); //min 
+if (sec.toString().length == 1) sec = '0' + sec; 
+if (min.toString().length == 1) min = '0' + min; 
+$('.timer').text(min + ':' + sec + ":" + ms); 
+},100); 
+}; 
+
+function stop_time(){ 
+$('.timer').text('00:00:00'); 
+clearInterval(start_time_interval); 
+} 
+
+$(document).keydown(function(e){ 
+// 37 - left 
+// 38 - top 
+// 39 - right 
+// 40 - down 
+
+switch (e.keyCode){ 
+case 37: 
+packmanCenter.x -= packmanShiftDistance 
+packmanDirect.alpha = 0.2 + 3.14; 
+packmanDirect.betta = 3.14 - 0.2; 
+break; 
+case 38: 
+packmanCenter.y -= packmanShiftDistance 
+packmanDirect.alpha = 3*3.14/2+0.2 
+packmanDirect.betta = 3*3.14/2-0.2 
+break; 
+case 39: 
+packmanCenter.x += packmanShiftDistance 
+packmanDirect.alpha = 0.2; 
+packmanDirect.betta = 2*3.14-0.2; 
+break; 
+case 40: 
+packmanCenter.y += packmanShiftDistance 
+packmanDirect.alpha = 3.14/2+0.2 
+packmanDirect.betta = 3.14/2-0.2 
+break; 
+} 
+}); 
+
+// infinite loop 
+setInterval(function(){ 
+clearContext(); 
+drawPackman(packmanCenter, packmanDirect); 
+}, 50) 
+
+</script> 
+
+</body> 
 </html>
