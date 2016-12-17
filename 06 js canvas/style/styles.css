@@ -1,0 +1,38 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-size: 30px;
+}
+
+.canvas{    
+    float: left;
+}
+
+.gamePlay{
+    width: 700px;;
+    height: 600px;
+    margin-left: 20px;
+    margin-top: 20px;    
+    float: left;
+}
+
+#panel_top{
+    margin-bottom: 10px;    
+    margin-left: 80px;
+    vertical-align: middle;
+}
+
+#panel_top h3{
+    margin-right:15px;
+    float: left;
+}
+
+#panel_right{    
+    border: 2px solid black;    
+    float: left;
+    margin-left: 70px;
+}
+
+#startGame{
+    float: left;
+}
