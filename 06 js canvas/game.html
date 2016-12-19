@@ -14,14 +14,17 @@
         <canvas id="canvas" class="canvas" width="500" height="500">
             Canvas is not supported on this device
         </canvas>
-
         <div id="panel_right">
-                        <h2 id="countFood">Еда <span>0</span></h2>
 
-            <input type="button" onclick="start_time()" value="Начать"/>
-            <input type="button" onclick="stop_time()" value="Сбросить"/>
+            <h2 id="countFood">Еда <span>0</span></h2>
+            <h2 id="level">Уровень <span>0</span></h2>
+            <list></list>
         </div>
-    </div>
+        <div id="panel_bottom">
+            <input type="button" onclick="startGame()" value="Начать"/>
+            <input type="button" onclick="stopGame()" value="Сбросить"/>
+</div>
+</div>
 </body>
 
 </html>
