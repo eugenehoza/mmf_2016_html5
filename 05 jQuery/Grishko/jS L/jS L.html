@@ -1,0 +1,31 @@
+<html>
+  <head>
+<style>
+.outline {
+    border: 2px solid rgb(0, 0, 0);
+    width: 340px;
+    padding: 5px;
+   }
+</style>
+   <script type="text/javascript">
+function ValidPhone() {
+    var ex = /^[\d]{3}\-[\d]{2}\-[\d]{3}-[\d]{2}-[\d]{2}$/;
+    var myPhone = document.getElementById('phone');
+    var valid = ex.test(myPhone.value);
+  if (valid) {
+    myPhone.style.border = "2px solid blue";
+}
+  else {
+    myPhone.style.border = "2px solid orange";
+    window.alert("Номер введен некорректно. Проверьте правильность введенных данных. ОБРАЗЕЦ: 375-29-657-20-31");
+};
+}
+   </script>
+  </head>
+<body>
+   <div class="outline">
+<p id="message" >Введите телефон в формате + xxx-xx-xxx-xx-xx :</p>
++ <input id="phone" type="text" size="12" placeholder="xxx-xx-xxx-xx-xx" onfocusout="ValidPhone();"/>
+   </div>
+</body>
+</html>
