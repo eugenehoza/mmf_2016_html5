@@ -2,63 +2,91 @@
 
 <head>
     <style>
-        table tr td {
-            border: 1px solid steelblue;
-        }
-    </style>
-    <meta charset="utf-8">
+table tr td {
+border: 1px solid steelblue;
+}
+</style>
+<script type="text/javascript" src="jquery-3.1.1.min.js"></script>
+<meta charset="utf-8">
 </head>
 
 <body>
+    JS
     <table id='table'></table>
-    <script type="text/javascript">
-        var table = document.getElementById('table');        
-        var countColumn = 15;
-        var countLine = 18;
-        for(var i = 1; i <= countLine; i++){
-            var tr = document.createElement('tr');
-            tr.className = i;
-            for(var j = 1; j <= countColumn; j++){
-                var td = document.createElement('td');
-                td.innerHTML = "ячейка";
-                td.className = j;
-                tr.onmouseover = tr.onmouseout = handler;                
-                tr.appendChild(td);
-            }            
-            table.appendChild(tr);
-        }     
+    jQUERY
+    <table id='table1'></table>
+    <script type="text/javascript"> 
 
-        function handler(event){
-            var indexColumn, indexRow;     
+        var table = document.getElementById('table');
+        var handler = function (event, table) {
+            var indexColumn, indexRow;
+            if (event == null) {
+                return;
+            }
+            var table;
+            if (table == null) {
+                table = document.getElementById('table');
+            } else {
+                table = document.getElementById('table1');
+            }
             indexColumn = event.path[0].className;
             indexRow = event.path[1].className;
-            if (event.type == 'mouseover') {               
-               var rows = document.getElementsByClassName(indexRow);
-               var columns = document.getElementsByClassName(indexColumn);
-               var changeRows = Array.prototype.filter.call(rows, function(row){
-                   return row.localName === 'tr';
-               });
-               var changeColumns = Array.prototype.filter.call(columns, function(column){
-                   return column.localName === 'td';
-               })
-               for(var i = 0; i < changeRows.length; i++){                   
-                       changeRows[i].style.background = 'red';                   
-               }               
-               for(var i = 0; i < changeColumns.length; i++){                   
-                       changeColumns[i].style.background = 'red';                   
-               }        
+            if (event.type == 'mouseover') {
+                var rows = table.getElementsByClassName(indexRow);
+                var columns = table.getElementsByClassName(indexColumn);
+                var changeRows = Array.prototype.filter.call(rows, function (row) {
+                    return row.localName === 'tr';
+                });
+                var changeColumns = Array.prototype.filter.call(columns, function (column) {
+                    return column.localName === 'td';
+                })
+                for (var i = 0; i < changeRows.length; i++) {
+                    changeRows[i].style.background = 'red';
+                }
+                for (var i = 0; i < changeColumns.length; i++) {
+                    changeColumns[i].style.background = 'red';
+                }
             }
-            if (event.type == 'mouseout') {            
-            var table = document.getElementById('table');
-               for(var i = 0; i < table.children.length; i++){
-                   table.children[i].style.background = '';
-                   for(var j = 0; j < table.children[i].children.length; j++){
-                       table.children[i].children[j].style.background = '';
-                   }
-               }
-           }
-        }  
+            if (event.type == 'mouseout') {
+                for (var i = 0; i < table.children.length; i++) {
+                    table.children[i].style.background = '';
+                    for (var j = 0; j < table.children[i].children.length; j++) {
+                        table.children[i].children[j].style.background = '';
+                    }
+                }
+            }
+        }
+        var createTable = function (table, countColumn, countLine, handler) {
+            // var countColumn = 15;
+            // var countLine = 18;
+            for (var i = 1; i <= countLine; i++) {
+                var tr = document.createElement('tr');
+                tr.className = i;
+                for (var j = 1; j <= countColumn; j++) {
+                    var td = document.createElement('td');
+                    td.innerHTML = "ячейка";
+                    td.className = j;
+                    tr.onmouseover = handler;
+                    tr.onmouseout = handler;
+                    tr.appendChild(td);
+                }
+                table.appendChild(tr);
+            }
+        }
+
+        createTable(table, 15, 18, handler);
     </script>
+<script type="text/javascript"> 
+        var rowTemplate = '<tr></tr>';
+        var alternateRowTemplate = "<td></td>";
+        for (var i = 0; i < 18; i++) {
+            $("#table1").append('<tr class="' + (i + 1) + '"></tr>').addClass(i);
+        }
+        for (var i = 0; i < 15; i++) {
+            $('#table1 tr').append('<td class=\"' + (i + 1) + '\">ячейка</td>').mouseout(item => handler(item.originalEvent, "table1"))
+                .mouseover(item => handler(item.originalEvent, "table1"));
+        }
+</script>
 </body>
 
 </html>
